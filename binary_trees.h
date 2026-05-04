@@ -2,6 +2,7 @@
 #define BINARY_TREES_H
 
 #include <stddef.h>
+#include <stdlib.h>
 
 /**
  * struct binary_tree_s - Binary tree node
@@ -19,7 +20,13 @@ struct binary_tree_s
 	struct binary_tree_s *right;
 };
 
+/* Basic Binary Tree */
 typedef struct binary_tree_s binary_tree_t;
+
+/* Advanced Trees Typedefs */
+typedef struct binary_tree_s bst_t;
+typedef struct binary_tree_s avl_t;
+typedef struct binary_tree_s heap_t;
 
 /* Task 0 */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
@@ -49,10 +56,6 @@ int binary_tree_is_perfect(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
 
-/* Advanced Tasks */
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
-bst_t *array_to_bst(int *array, size_t size);
-
 /* Tasks 20 - 25 */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 int binary_tree_is_complete(const binary_tree_t *tree);
@@ -60,8 +63,10 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
 int binary_tree_is_bst(const binary_tree_t *tree);
 
-/* BST */
-typedef struct binary_tree_s bst_t;
+/* Advanced Tasks */
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
+				     const binary_tree_t *second);
+bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_insert(bst_t **tree, int value);
 
 #endif /* BINARY_TREES_H */
