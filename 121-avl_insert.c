@@ -1,7 +1,38 @@
 #include "binary_trees.h"
 
 /**
- * r_insert_node - recursive helper function to insert a value in an AVL tree
+ * balance_avl_tree - Balances an AVL tree after insertion
+ * @tree: Double pointer to the root node of the tree
+ * @val: The inserted value
+ *
+ * Return: Pointer to the balanced tree
+ */
+avl_t *balance_avl_tree(avl_t **tree, int val)
+{
+	int bval;
+
+	bval = binary_tree_balance(*tree);
+
+	if (bval > 1 && (*tree)->left->n > val)
+		*tree = binary_tree_rotate_right(*tree);
+	else if (bval > 1 && (*tree)->left->n < val)
+	{
+		(*tree)->left = binary_tree_rotate_left((*tree)->left);
+		*tree = binary_tree_rotate_right(*tree);
+	}
+	else if (bval < -1 && (*tree)->right->n < val)
+		*tree = binary_tree_rotate_left(*tree);
+	else if (bval < -1 && (*tree)->right->n > val)
+	{
+		(*tree)->right = binary_tree_rotate_right((*tree)->right);
+		*tree = binary_tree_rotate_left(*tree);
+	}
+
+	return (*tree);
+}
+
+/**
+ * r_insert_node - recursive helper function to insert a value
  * @tree: double pointer to the root node of the AVL tree struct
  * @parent: parent node of the current tree
  * @new: double pointer to store the newly created node
@@ -11,8 +42,6 @@
  */
 avl_t *r_insert_node(avl_t **tree, avl_t *parent, avl_t **new, int val)
 {
-	int bval;
-
 	if (*tree == NULL)
 	{
 		*new = binary_tree_node(parent, val);
@@ -37,24 +66,7 @@ avl_t *r_insert_node(avl_t **tree, avl_t *parent, avl_t **new, int val)
 	else
 		return (*tree);
 
-	bval = binary_tree_balance(*tree);
-
-	if (bval > 1 && (*tree)->left->n > val)
-		*tree = binary_tree_rotate_right(*tree);
-	else if (bval > 1 && (*tree)->left->n < val)
-	{
-		(*tree)->left = binary_tree_rotate_left((*tree)->left);
-		*tree = binary_tree_rotate_right(*tree);
-	}
-	else if (bval < -1 && (*tree)->right->n < val)
-		*tree = binary_tree_rotate_left(*tree);
-	else if (bval < -1 && (*tree)->right->n > val)
-	{
-		(*tree)->right = binary_tree_rotate_right((*tree)->right);
-		*tree = binary_tree_rotate_left(*tree);
-	}
-
-	return (*tree);
+	return (balance_avl_tree(tree, val));
 }
 
 /**
