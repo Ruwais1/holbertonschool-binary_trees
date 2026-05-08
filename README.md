@@ -27,8 +27,7 @@ The project includes implementations for:
 - Max Binary Heap insertion, extraction, array conversion, and sorting
 - Big O answer files for selected advanced tasks
 
-This README is intentionally detailed so the project can be reviewed easily
-without opening every source file first.
+
 
 ---
 
@@ -89,10 +88,6 @@ This project helps practice and understand:
 | Recommended flags | `-Wall -Wextra -Werror -pedantic` |
 | Header file | `binary_trees.h` |
 
-No `Makefile` is included in the repository.
-
-The repository also does not include standalone `main` test files. Functions are
-intended to be compiled with checker files or local test files.
 
 ---
 
